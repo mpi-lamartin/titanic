@@ -42,15 +42,6 @@ L'objectif est de prédire si un passager a survécu, en fonction de ses donnée
   - Enfant = fille, fils, belle-fille, beau-fils
   - Certains enfants voyageaient uniquement avec une nourrice, donc Parch=0 pour eux
 
-## Structure du Code OCaml
-
-```
-src/
-├── csv_loader.ml    # Module de chargement des données CSV
-├── women_survive.ml # Exemple de classification simple
-└── id3.ml           # Algorithme ID3 (arbre de décision)
-```
-
 ### Module `csv_loader.ml`
 
 Ce module fournit :
@@ -84,11 +75,6 @@ make build
 dune exec src/women_survive.exe
 # ou
 make run
-
-# Algorithme ID3
-dune exec src/id3.exe
-# ou
-make id3
 ```
 
 ## Format de Soumission
