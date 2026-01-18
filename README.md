@@ -47,7 +47,8 @@ L'objectif est de prédire si un passager a survécu, en fonction de ses donnée
 ```
 src/
 ├── csv_loader.ml    # Module de chargement des données CSV
-└── women_survive.ml # Exemple de classification simple
+├── women_survive.ml # Exemple de classification simple
+└── id3.ml           # Algorithme ID3 (arbre de décision)
 ```
 
 ### Module `csv_loader.ml`
@@ -65,27 +66,57 @@ Un classificateur simple basé sur l'observation historique que "les femmes et l
 
 Ce modèle simple atteint environ **78.68%** de précision sur les données d'entraînement.
 
+### Algorithme `id3.ml`
+
+Implémentation de l'algorithme **ID3** (Iterative Dichotomiser 3) pour construire un arbre de décision :
+
+**Principe :**
+1. Calculer l'**entropie** de l'ensemble de données
+2. Pour chaque attribut, calculer le **gain d'information** (réduction d'entropie)
+3. Sélectionner l'attribut avec le meilleur gain d'information
+4. Créer un nœud de décision et partitionner les données
+5. Répéter récursivement jusqu'aux conditions d'arrêt
+
+**Attributs utilisés :**
+- `Sex` : sexe du passager
+- `Pclass` : classe du billet (1, 2 ou 3)
+- `AgeGroup` : groupe d'âge (child, young, adult, senior, unknown)
+- `FamilySize` : taille de la famille (alone, small, large)
+- `Embarked` : port d'embarquement (C, Q, S)
+- `FareGroup` : groupe tarifaire (low, medium, high, very_high)
+
+**Formules mathématiques :**
+
+L'entropie mesure l'impureté d'un ensemble :
+$$H(S) = -\sum_{c \in \{0,1\}} p_c \log_2(p_c)$$
+
+Le gain d'information pour un attribut $A$ :
+$$IG(S, A) = H(S) - \sum_{v \in \text{valeurs}(A)} \frac{|S_v|}{|S|} H(S_v)$$
+
 ## Compilation et Exécution
 
-### Compilation de l'exemple
+### Compilation
 
 ```bash
-# Compilation simple
-cd src
-ocamlopt -o women_survive csv_loader.ml women_survive.ml
+# Avec Dune
+dune build
 
-# Ou avec ocamlfind
-ocamlfind ocamlopt -package unix -linkpkg -o women_survive csv_loader.ml women_survive.ml
-
-# Ou avec Dune
-dune exec ./src/women_survive.exe
+# Ou avec Make
+make build
 ```
 
 ### Exécution
 
 ```bash
-# Depuis la racine du projet
-./src/women_survive
+# Modèle simple (women survive)
+dune exec src/women_survive.exe
+# ou
+make run
+
+# Algorithme ID3
+dune exec src/id3.exe
+# ou
+make id3
 ```
 
 ## Format de Soumission
