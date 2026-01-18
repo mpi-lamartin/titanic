@@ -2,9 +2,9 @@
 
 ## Description du Problème
 
-Le naufrage du TitaÂnic est l'une des catastrophes maritimes les plus célèbres de l'histoire. Le 15 avril 1912, lors de son voyage inaugural, le Titanic a coulé après avoir heurté un iceberg, causant la mort de 1502 des 2224 passagers et membres d'équipage.
+Le naufrage du Titanic est l'une des catastrophes maritimes les plus célèbres de l'histoire. Le 15 avril 1912, lors de son voyage inaugural, le Titanic a coulé après avoir heurté un iceberg, causant la mort de 1502 des 2224 passagers et membres d'équipage.
 
-L'objectif est de prédire si un passager a survécu. 
+L'objectif est de prédire si un passager a survécu, en fonction de ses données personnelles (genre, âge, classe du billet...).
 
 ## Structure des Données
 
@@ -67,11 +67,6 @@ Ce modèle simple atteint environ **78.68%** de précision sur les données d'en
 
 ## Compilation et Exécution
 
-### Prérequis
-
-- OCaml (>= 4.08)
-- ocamlfind (optionnel)
-
 ### Compilation de l'exemple
 
 ```bash
@@ -93,15 +88,9 @@ dune exec ./src/women_survive.exe
 ./src/women_survive
 ```
 
-Le programme va :
-1. Charger les données d'entraînement et de test
-2. Afficher des statistiques descriptives
-3. Évaluer le modèle sur les données d'entraînement
-4. Générer un fichier `submission.csv` avec les prédictions
-
 ## Format de Soumission
 
-Le fichier `submission.csv` doit contenir exactement 418 entrées plus une ligne d'en-tête :
+Il faut soumettre sur Kaggle un fichier `submission.csv` qui doit contenir exactement les prévisions pour les 418 entrées du fichier test.csv, plus une ligne d'en-tête :
 
 ```csv
 PassengerId,Survived
@@ -110,3 +99,4 @@ PassengerId,Survived
 894,0
 ...
 ```
+
