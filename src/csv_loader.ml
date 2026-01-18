@@ -126,27 +126,3 @@ let load_test_data filename =
   | [] -> []
   | _ :: data_lines ->  (* Ignore l'en-tête *)
     List.filter_map parse_test_line data_lines
-
-(** Retourne true si le passager est une femme *)
-let is_female p = p.sex = "female"
-
-(** Retourne true si le passager est un homme *)
-let is_male p = p.sex = "male"
-
-(** Compte le nombre de passagers dans une liste *)
-let count_passengers passengers = List.length passengers
-
-(** Filtre les passagers par sexe *)
-let filter_by_sex sex passengers =
-  List.filter (fun p -> p.sex = sex) passengers
-
-(** Filtre les passagers par classe *)
-let filter_by_class pclass passengers =
-  List.filter (fun p -> p.pclass = pclass) passengers
-
-(** Calcule le taux de survie pour une liste de passagers *)
-let survival_rate passengers =
-  let survivors = List.filter (fun p -> p.survived = Some 1) passengers in
-  let total = List.length passengers in
-  if total = 0 then 0.0
-  else float_of_int (List.length survivors) /. float_of_int total

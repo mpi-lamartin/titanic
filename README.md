@@ -55,8 +55,7 @@ src/
 
 Ce module fournit :
 - Le type `passenger` représentant un passager
-- Des fonctions pour parser les fichiers CSV
-- Des fonctions utilitaires (filtrage, statistiques)
+- Des fonctions `load_train_data : string -> passenger list` et `load_test_data : string -> passenger list` pour parser les fichiers CSV
 
 ### Exemple `women_survive.ml`
 
@@ -64,34 +63,7 @@ Un classificateur simple basé sur l'observation historique que "les femmes et l
 - Toutes les femmes sont prédites comme survivantes (1)
 - Tous les hommes sont prédits comme non-survivants (0)
 
-Ce modèle simple atteint environ **78.68%** de précision sur les données d'entraînement.
-
-### Algorithme `id3.ml`
-
-Implémentation de l'algorithme **ID3** (Iterative Dichotomiser 3) pour construire un arbre de décision :
-
-**Principe :**
-1. Calculer l'**entropie** de l'ensemble de données
-2. Pour chaque attribut, calculer le **gain d'information** (réduction d'entropie)
-3. Sélectionner l'attribut avec le meilleur gain d'information
-4. Créer un nœud de décision et partitionner les données
-5. Répéter récursivement jusqu'aux conditions d'arrêt
-
-**Attributs utilisés :**
-- `Sex` : sexe du passager
-- `Pclass` : classe du billet (1, 2 ou 3)
-- `AgeGroup` : groupe d'âge (child, young, adult, senior, unknown)
-- `FamilySize` : taille de la famille (alone, small, large)
-- `Embarked` : port d'embarquement (C, Q, S)
-- `FareGroup` : groupe tarifaire (low, medium, high, very_high)
-
-**Formules mathématiques :**
-
-L'entropie mesure l'impureté d'un ensemble :
-$$H(S) = -\sum_{c \in \{0,1\}} p_c \log_2(p_c)$$
-
-Le gain d'information pour un attribut $A$ :
-$$IG(S, A) = H(S) - \sum_{v \in \text{valeurs}(A)} \frac{|S_v|}{|S|} H(S_v)$$
+Ce modèle simple atteint environ **77%** de précision.
 
 ## Compilation et Exécution
 
