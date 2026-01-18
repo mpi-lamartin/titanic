@@ -61,10 +61,7 @@ Ce modèle simple atteint environ **77%** de précision.
 ### Compilation
 
 ```bash
-# Avec Dune
-dune build
-
-# Ou avec Make
+# Avec Make
 make build
 ```
 
@@ -72,8 +69,6 @@ make build
 
 ```bash
 # Modèle simple (women survive)
-dune exec src/women_survive.exe
-# ou
 make run
 ```
 

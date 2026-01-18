@@ -1,7 +1,0 @@
-(executable
- (name women_survive)
- (modules csv_loader women_survive))
-
-(executable
- (name id3)
- (modules csv_loader id3))
