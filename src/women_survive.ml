@@ -2,7 +2,7 @@
 
 open Csv_loader
 
-let predict p = if is_female p then 1 else 0
+let predict p = if p.sex = "female" then 1 else 0
 
 let accuracy data =
   let correct = List.filter (fun p -> p.survived = Some (predict p)) data in

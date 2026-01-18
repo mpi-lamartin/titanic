@@ -1,13 +1,10 @@
-.PHONY: build run clean id3
+.PHONY: build run clean
 
 build:
 	dune build
 
 run: build
 	dune exec src/women_survive.exe
-
-id3: build
-	dune exec src/id3.exe
 
 clean:
 	dune clean
