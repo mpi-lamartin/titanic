@@ -1,0 +1,3 @@
+(executable
+ (name women_survive)
+ (modules csv_loader women_survive))

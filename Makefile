@@ -1,11 +1,11 @@
-main: *.c
-	gcc -o main.exe -Wall *.c -lm
+.PHONY: build run clean
 
-safe: *.c
-	gcc -o main.exe -g -Wall -Wextra -fsanitize=address *.c -lm
+build:
+	dune build
 
-full: *.c
-	gcc -o main.exe -g -Wall -Wextra -std=c99 -pedantic -Wvla -fsanitize=address,undefined *.c -lm
+run: build
+	dune exec src/women_survive.exe
 
 clean:
-	rm -f *.o *.exe
+	dune clean
+	rm -f submission.csv

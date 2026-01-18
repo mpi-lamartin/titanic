@@ -1,0 +1,26 @@
+# OCaml / Dune
+_build/
+*.byte
+*.native
+*.install
+*.merlin
+
+# Compiled files
+*.cmi
+*.cmo
+*.cmx
+*.cma
+*.cmxa
+*.o
+*.a
+
+# Editor
+*~
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+
+# Project specific
+submission.csv

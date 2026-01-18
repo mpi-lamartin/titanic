@@ -1,17 +1,112 @@
-# Environnement de développement pour les TP de MPI
+# Titanic - Prédiction de Survie
 
-Contient :
-- `utop` comme interpréteur interactif OCaml
-- `gcc` comme compilateur C (exemple : gcc test.c puis ./a.out)
-- `ocaml` pour exécuter un fichier OCaml (exemple : ocaml test.ml)
-- `ocamlopt` pour compiler un fichier OCaml (exemple : ocamlopt test.ml puis ./a.out)
+## Description du Problème
 
-Le Makefile est celui donné au TP d'informatique à CCINP et permet de simplifier les commandes.  
-Par exemple, `make main` est un raccourci pour `gcc -o main.exe -Wall *.c -lm` : il compile tous les fichiers C et produit un exécutable `main.exe`.
+Le naufrage du TitaÂnic est l'une des catastrophes maritimes les plus célèbres de l'histoire. Le 15 avril 1912, lors de son voyage inaugural, le Titanic a coulé après avoir heurté un iceberg, causant la mort de 1502 des 2224 passagers et membres d'équipage.
 
-> Extrait du rapport CCINP 2024  
-> Cet énoncé est accompagné d’un code compagnon en C *.c fournissant certaines des fonctions mentionnées dans l’énoncé : il est à compléter en y implémentant les fonctions demandées.
-> La ligne de compilation gcc -o main.exe -Wall *.c -lm vous permet de créer un exécutable main.exe à partir du ou des fichiers C fournis. Vous pouvez également utiliser l’utilitaire make. En ligne de commande, il suffit d'écrire make. Dans les deux cas, si la compilation réussit, le programme peut être exécuté avec la commande ./main.exe
-> Il est possible d'activer davantage d'avertissements et un outil d'analyse de la gestion de la mémoire avec la ligne de compilation gcc -o main.exe -g -Wall -Wextra -fsanitize=address *.c -lm ou en écrivant make safe. L’examinateur pourra vous demander de compiler avec ces options.
-> Si vous désirez forcer la compilation de tous les fichiers, vous pouvez au préalable nettoyer le répertoire en faisant make clean et relancer une compilation.
+L'objectif est de prédire si un passager a survécu. 
 
+## Structure des Données
+
+### Fichiers
+
+- `data/train.csv` : Données d'entraînement avec les étiquettes de survie (891 passagers)
+- `data/test.csv` : Données de test sans étiquettes (418 passagers)
+
+### Description des Variables
+
+| Variable | Description | Type |
+|----------|-------------|------|
+| `PassengerId` | Identifiant unique du passager | Entier |
+| `Survived` | Survie (0 = Non, 1 = Oui) | Entier (uniquement dans train.csv) |
+| `Pclass` | Classe du billet (1 = 1ère, 2 = 2ème, 3 = 3ème) | Entier |
+| `Name` | Nom du passager | Chaîne |
+| `Sex` | Sexe (`male` ou `female`) | Chaîne |
+| `Age` | Âge en années | Flottant (peut être manquant) |
+| `SibSp` | Nombre de frères/sœurs ou conjoints à bord | Entier |
+| `Parch` | Nombre de parents/enfants à bord | Entier |
+| `Ticket` | Numéro du billet | Chaîne |
+| `Fare` | Prix du billet | Flottant |
+| `Cabin` | Numéro de cabine | Chaîne (souvent manquant) |
+| `Embarked` | Port d'embarquement (C = Cherbourg, Q = Queenstown, S = Southampton) | Chaîne |
+
+### Notes sur les Variables
+
+- **Pclass** : Un indicateur du statut socio-économique (1 = Haute, 2 = Moyenne, 3 = Basse)
+- **Age** : L'âge est fractionnel si inférieur à 1. Si l'âge est estimé, il est sous la forme xx.5
+- **SibSp** : Définitions des relations familiales :
+  - Frère/Sœur = frère, sœur, demi-frère, demi-sœur
+  - Conjoint = mari, femme (maîtresses et fiancés ignorés)
+- **Parch** : Définitions des relations familiales :
+  - Parent = mère, père
+  - Enfant = fille, fils, belle-fille, beau-fils
+  - Certains enfants voyageaient uniquement avec une nourrice, donc Parch=0 pour eux
+
+## Structure du Code OCaml
+
+```
+src/
+├── csv_loader.ml    # Module de chargement des données CSV
+└── women_survive.ml # Exemple de classification simple
+```
+
+### Module `csv_loader.ml`
+
+Ce module fournit :
+- Le type `passenger` représentant un passager
+- Des fonctions pour parser les fichiers CSV
+- Des fonctions utilitaires (filtrage, statistiques)
+
+### Exemple `women_survive.ml`
+
+Un classificateur simple basé sur l'observation historique que "les femmes et les enfants d'abord" était la règle lors de l'évacuation :
+- Toutes les femmes sont prédites comme survivantes (1)
+- Tous les hommes sont prédits comme non-survivants (0)
+
+Ce modèle simple atteint environ **78.68%** de précision sur les données d'entraînement.
+
+## Compilation et Exécution
+
+### Prérequis
+
+- OCaml (>= 4.08)
+- ocamlfind (optionnel)
+
+### Compilation de l'exemple
+
+```bash
+# Compilation simple
+cd src
+ocamlopt -o women_survive csv_loader.ml women_survive.ml
+
+# Ou avec ocamlfind
+ocamlfind ocamlopt -package unix -linkpkg -o women_survive csv_loader.ml women_survive.ml
+
+# Ou avec Dune
+dune exec ./src/women_survive.exe
+```
+
+### Exécution
+
+```bash
+# Depuis la racine du projet
+./src/women_survive
+```
+
+Le programme va :
+1. Charger les données d'entraînement et de test
+2. Afficher des statistiques descriptives
+3. Évaluer le modèle sur les données d'entraînement
+4. Générer un fichier `submission.csv` avec les prédictions
+
+## Format de Soumission
+
+Le fichier `submission.csv` doit contenir exactement 418 entrées plus une ligne d'en-tête :
+
+```csv
+PassengerId,Survived
+892,0
+893,1
+894,0
+...
+```
