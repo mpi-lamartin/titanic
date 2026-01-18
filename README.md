@@ -58,6 +58,8 @@ Ce modèle simple atteint environ **77%** de précision.
 
 ## Compilation et Exécution
 
+Voir Makefile pour les détails.
+
 ### Compilation
 
 ```bash
