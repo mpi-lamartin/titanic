@@ -90,5 +90,6 @@ PassengerId,Survived
 
 - Réfléchir aux attributs à utiliser (certains ne sont peut-être pas utiles). Convertir les données en vecteurs. Standardiser les données. Séparer les données d'entraînements pour tester.
 - Algorithme des $k$ plus proches voisins : Pour quel $k$ ? Quelle distance ?
-- Algorithme ID3.
+- Algorithme ID3 : à adapter pour utiliser des attributs non-binaires.
+- Algorithme des $k$-moyennes et CHA : a priori pas adapté car il s'agit ici de classification supervisé. Mais on peut quand même les appliquer en ignorant l'attribut Survived.   
 - Combiner plusieurs algorithmes.
