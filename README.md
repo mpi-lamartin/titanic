@@ -86,3 +86,9 @@ PassengerId,Survived
 ...
 ```
 
+## Suggestions
+
+- Réfléchir aux attributs à utiliser (certains ne sont peut-être pas utiles). Convertir les données en vecteurs. Standardiser les données. Séparer les données d'entraînements pour tester.
+- Algorithme des $k$ plus proches voisins : Pour quel $k$ ? Quelle distance ?
+- Algorithme ID3.
+- Combiner plusieurs algorithmes.
