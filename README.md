@@ -103,3 +103,10 @@ PassengerId,Survived
 ...
 ```
 
+## Suggestions
+
+- Réfléchir aux attributs à utiliser (certains ne sont peut-être pas utiles). Regarder des statistiques sur les données. Convertir les données en vecteurs (male/female -> 0/1). Standardiser les données. Séparer les données d'entraînements pour tester.
+- Algorithme des $k$ plus proches voisins : Pour quel $k$ ? Quelle distance ?
+- Algorithme ID3 : à adapter pour utiliser des attributs non-binaires.
+- Algorithme des $k$-moyennes et CHA : a priori pas adapté car il s'agit ici de classification supervisé. Mais on peut quand même les appliquer en ignorant l'attribut Survived.   
+- Combiner plusieurs algorithmes (en conservant la prédiction majoritaire).
