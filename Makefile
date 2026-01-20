@@ -2,10 +2,8 @@
 
 # Build the women_survive executable without Dune
 build:
-	# Compile the library module first (outputs to src/)
-	ocamlopt -c src/csv_loader.ml
-	# Compile and link the executable using the compiled module
-	ocamlopt -I src -o women_survive.exe src/csv_loader.cmx src/women_survive.ml
+	cd src &&\
+	ocamlfind ocamlopt -package str -linkpkg csv_loader.ml women_survive.ml -o ../women_survive.exe
 
 # Run the executable
 run: build

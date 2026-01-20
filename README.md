@@ -15,6 +15,23 @@ L'objectif est de prédire si un passager a survécu, en fonction de ses donnée
 
 ### Description des Variables
 
+Le type `passenger` représentant un passager du Titanic est défini dans `csv_loader.ml` :
+
+type passenger = {
+  passenger_id : int;
+  survived : int option;  (* None pour les données de test *)
+  pclass : int;
+  name : string;
+  sex : string;
+  age : float option;
+  sibsp : int;
+  parch : int;
+  ticket : string;
+  fare : float option;
+  cabin : string option;
+  embarked : string option;
+}
+
 | Variable | Description | Type |
 |----------|-------------|------|
 | `PassengerId` | Identifiant unique du passager | Entier |
@@ -46,7 +63,7 @@ L'objectif est de prédire si un passager a survécu, en fonction de ses donnée
 
 Ce module fournit :
 - Le type `passenger` représentant un passager
-- Des fonctions `load_train_data : string -> passenger list` et `load_test_data : string -> passenger list` pour parser les fichiers CSV
+- Des fonctions `load_train_data : string -> passenger list` et `load_test_data : string -> passenger list` pour permettent de récupérer les données d'entraînements et de test sous forme de listes de passagers.
 
 ### Exemple `women_survive.ml`
 
@@ -58,7 +75,7 @@ Ce modèle simple atteint environ **77%** de précision.
 
 ## Compilation et Exécution
 
-Voir Makefile pour les détails.
+Voir le fichier Makefile pour les détails.
 
 ### Compilation
 
