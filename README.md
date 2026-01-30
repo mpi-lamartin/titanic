@@ -17,6 +17,7 @@ L'objectif est de prédire si un passager a survécu, en fonction de ses donnée
 
 Le type `passenger` représentant un passager du Titanic est défini dans `csv_loader.ml` :
 
+```ocaml
 type passenger = {
   passenger_id : int;
   survived : int option;  (* None pour les données de test *)
@@ -31,21 +32,22 @@ type passenger = {
   cabin : string option;
   embarked : string option;
 }
+```
 
 | Variable | Description | Type |
 |----------|-------------|------|
-| `PassengerId` | Identifiant unique du passager | Entier |
-| `Survived` | Survie (0 = Non, 1 = Oui) | Entier (uniquement dans train.csv) |
-| `Pclass` | Classe du billet (1 = 1ère, 2 = 2ème, 3 = 3ème) | Entier |
-| `Name` | Nom du passager | Chaîne |
-| `Sex` | Sexe (`male` ou `female`) | Chaîne |
-| `Age` | Âge en années | Flottant (peut être manquant) |
-| `SibSp` | Nombre de frères/sœurs ou conjoints à bord | Entier |
-| `Parch` | Nombre de parents/enfants à bord | Entier |
-| `Ticket` | Numéro du billet | Chaîne |
-| `Fare` | Prix du billet | Flottant |
-| `Cabin` | Numéro de cabine | Chaîne (souvent manquant) |
-| `Embarked` | Port d'embarquement (C = Cherbourg, Q = Queenstown, S = Southampton) | Chaîne |
+| `passenger_id` | Identifiant unique du passager | Entier |
+| `survived` | Survie (0 = Non, 1 = Oui) | Entier (uniquement dans train.csv) |
+| `pclass` | Classe du billet (1 = 1ère, 2 = 2ème, 3 = 3ème) | Entier |
+| `name` | Nom du passager | Chaîne |
+| `sex` | Sexe (`male` ou `female`) | Chaîne |
+| `age` | Âge en années | Flottant (peut être manquant) |
+| `sibsp` | Nombre de frères/sœurs ou conjoints à bord | Entier |
+| `parch` | Nombre de parents/enfants à bord | Entier |
+| `ticket` | Numéro du billet | Chaîne |
+| `fare` | Prix du billet | Flottant |
+| `cabin` | Numéro de cabine | Chaîne (souvent manquant) |
+| `embarked` | Port d'embarquement (C = Cherbourg, Q = Queenstown, S = Southampton) | Chaîne |
 
 ### Notes sur les Variables
 
